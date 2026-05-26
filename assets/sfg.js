@@ -12,10 +12,18 @@
   /* year */
   $$('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
 
-  /* live node IP/status clock-ish — set HKT time in any [data-hkt] */
-  const hkt = () => new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Hong_Kong' }).format(new Date());
-  const setHkt = () => $$('[data-hkt]').forEach(el => el.textContent = hkt() + ' HKT');
-  if ($('[data-hkt]')) { setHkt(); setInterval(setHkt, 30000); }
+  /* US East-coast clock — set in any [data-clock]. Abbreviation (EST/EDT)
+     resolves automatically for America/New_York. */
+  const estClock = () => {
+    const p = new Intl.DateTimeFormat('en-US', {
+      hour: '2-digit', minute: '2-digit', hour12: false,
+      timeZone: 'America/New_York', timeZoneName: 'short',
+    }).formatToParts(new Date());
+    const get = t => (p.find(x => x.type === t) || {}).value || '';
+    return `${get('hour')}:${get('minute')} ${get('timeZoneName')}`;
+  };
+  const setClock = () => $$('[data-clock]').forEach(el => el.textContent = estClock());
+  if ($('[data-clock]')) { setClock(); setInterval(setClock, 30000); }
 
   /* mobile menu */
   const menuBtn = $('.menu-btn'), tabs = $('.tabs');
