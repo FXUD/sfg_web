@@ -43,7 +43,7 @@ python3 -m http.server 4321        # then open http://localhost:4321
 
 ## Deploy (Vercel)
 
-1. **New Project** → import `Starr-Financial-Group/sfg_official_web_new`.
+1. **New Project** → import `FXUD/sfg_web` (personal GitHub account).
 2. **Root Directory:** leave as `./` (this repo *is* the site root — do
    not set `sfg-site/`).
 3. **Framework Preset:** `Other`. Leave Build Command and Output Directory
