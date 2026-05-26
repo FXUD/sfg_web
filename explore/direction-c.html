@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SFG — Direction C · Gradient Mesh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0A0410; --fg:#FFFFFF; --dim:rgba(255,255,255,.66);
+    --c1:#7C5CFF; --c2:#FF5CA8; --c3:#34D3FF; --c4:#FFD166;
+    --font:'Space Grotesk',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font-family:var(--font);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--c2);color:#fff}
+  a{color:inherit;text-decoration:none}
+
+  canvas.mesh{position:fixed;inset:0;z-index:0;filter:blur(60px) saturate(1.3)}
+  .noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.06;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+  .darken{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 60%,transparent 30%,rgba(10,4,16,.5) 100%)}
+
+  /* floating glass blobs */
+  .blob{position:fixed;border-radius:50%;z-index:2;pointer-events:none;mix-blend-mode:screen;filter:blur(2px);
+    background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.5),transparent 60%)}
+  .blob.b1{width:160px;height:160px;top:18%;right:14%;box-shadow:inset 0 0 40px rgba(124,92,255,.6)}
+  .blob.b2{width:90px;height:90px;bottom:22%;left:12%;box-shadow:inset 0 0 30px rgba(255,92,168,.6)}
+  .blob.b3{width:120px;height:120px;top:60%;right:30%;box-shadow:inset 0 0 34px rgba(52,211,255,.6)}
+
+  .wrap{position:relative;z-index:10;max-width:1240px;margin:0 auto;padding:0 36px}
+
+  header.bar{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;
+    padding:22px 36px;max-width:1240px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;letter-spacing:-.01em}
+  .brand .orb{width:22px;height:22px;border-radius:50%;background:conic-gradient(from 0deg,var(--c1),var(--c2),var(--c3),var(--c4),var(--c1));animation:spin 6s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  nav.tabs{display:flex;gap:8px}
+  nav.tabs a{padding:9px 16px;border-radius:30px;font-size:14px;font-weight:500;color:var(--dim);transition:background .25s,color .25s}
+  nav.tabs a:hover{background:rgba(255,255,255,.12);color:#fff}
+  @media(max-width:780px){nav.tabs a:not(:last-child){display:none}}
+
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:90px}
+  .pill{align-self:flex-start;display:inline-flex;align-items:center;gap:9px;padding:8px 16px;border-radius:30px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);
+    font-size:13px;font-weight:500;color:var(--dim)}
+  .pill .live{width:8px;height:8px;border-radius:50%;background:var(--c3);box-shadow:0 0 10px var(--c3)}
+  h1{font-weight:700;line-height:.95;letter-spacing:-.035em;font-size:clamp(54px,11vw,156px);margin:26px 0 0}
+  h1 .w{display:inline-block}
+  h1 .grad{background:linear-gradient(100deg,var(--c3),var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .sub{max-width:600px;margin-top:30px;font-size:clamp(18px,2.3vw,23px);line-height:1.5;color:var(--dim);font-weight:400}
+  .sub b{color:#fff;font-weight:600}
+  .cta-row{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap}
+  .btn{padding:16px 30px;border-radius:40px;font-size:15px;font-weight:600;transition:transform .25s,box-shadow .25s}
+  .btn:hover{transform:translateY(-3px)}
+  .btn.fill{background:linear-gradient(100deg,var(--c1),var(--c2));color:#fff;box-shadow:0 10px 40px rgba(124,92,255,.4)}
+  .btn.glass{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(10px);color:#fff}
+</style>
+</head>
+<body>
+  <canvas class="mesh"></canvas>
+  <div class="darken"></div>
+  <div class="noise"></div>
+  <div class="blob b1" data-float="0.4"></div>
+  <div class="blob b2" data-float="-0.6"></div>
+  <div class="blob b3" data-float="0.5"></div>
+
+  <header class="bar">
+    <div class="brand"><span class="orb"></span>Starr Fintech Global</div>
+    <nav class="tabs"><a>Home</a><a>Starr Quant Lab</a><a>Team</a><a>Contact</a></nav>
+  </header>
+
+  <div class="wrap">
+    <section class="hero">
+      <span class="pill" data-fade><span class="live"></span>Web 3.0 · Quantitative Trading · Research</span>
+      <h1 id="title">
+        <span class="w">Starr</span> <span class="w">Fintech</span><br>
+        <span class="w grad">Global</span>
+      </h1>
+      <p class="sub" data-fade>One group, many frontiers — from <b>quantitative execution</b> to the <b>infrastructure</b> and partnerships powering next-generation finance.</p>
+      <div class="cta-row" data-fade>
+        <a class="btn fill">Explore the group</a>
+        <a class="btn glass">Meet the team</a>
+      </div>
+    </section>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script>
+(()=>{
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* animated mesh gradient */
+  const cv=document.querySelector('canvas.mesh'),ctx=cv.getContext('2d');
+  let W,H,t=0,raf;
+  const cols=[[124,92,255],[255,92,168],[52,211,255],[255,209,102]];
+  function size(){W=cv.width=Math.ceil(innerWidth/4);H=cv.height=Math.ceil(innerHeight/4);cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';}
+  function draw(){
+    t+=.004;ctx.clearRect(0,0,W,H);
+    cols.forEach((c,i)=>{
+      const x=W*(.5+.4*Math.sin(t*(1+i*.3)+i*1.7));
+      const y=H*(.5+.4*Math.cos(t*(1.2+i*.25)+i*2.1));
+      const r=Math.max(W,H)*.6;
+      const g=ctx.createRadialGradient(x,y,0,x,y,r);
+      g.addColorStop(0,`rgba(${c[0]},${c[1]},${c[2]},.9)`);
+      g.addColorStop(1,`rgba(${c[0]},${c[1]},${c[2]},0)`);
+      ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    });
+    raf=requestAnimationFrame(draw);
+  }
+  size();
+  if(!reduced)draw();else{t=2;draw();cancelAnimationFrame(raf);}
+  addEventListener('resize',()=>{size();});
+
+  if(!window.gsap){document.querySelectorAll('[data-fade]').forEach(e=>e.style.opacity=1);return;}
+  gsap.set('[data-fade]',{y:20,opacity:0});
+  gsap.set('h1 .w',{yPercent:120,opacity:0});
+  const tl=gsap.timeline({defaults:{ease:'back.out(1.6)'}});
+  tl.to('h1 .w',{yPercent:0,opacity:1,duration:1.1,stagger:.1},.2)
+    .to('[data-fade]',{y:0,opacity:1,duration:.8,stagger:.12,ease:'power3.out'},.6);
+
+  // parallax float on pointer
+  if(!reduced){
+    addEventListener('pointermove',e=>{
+      const dx=(e.clientX/innerWidth-.5),dy=(e.clientY/innerHeight-.5);
+      document.querySelectorAll('[data-float]').forEach(b=>{
+        const f=+b.dataset.float*40;
+        gsap.to(b,{x:dx*f,y:dy*f,duration:.8});
+      });
+    });
+    gsap.to('.blob',{y:'+=14',duration:3,ease:'sine.inOut',yoyo:true,repeat:-1,stagger:.5});
+  }
+})();
+</script>
+</body>
+</html>
