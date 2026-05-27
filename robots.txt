@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /privacy-policy.html
+Disallow: /accessibility-statement.html
+
+Sitemap: https://sfg.xyz/sitemap.xml
