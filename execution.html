@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Execution — Starr Fintech Global</title>
+<meta name="description" content="Starr Execution: benchmarked execution for large digital-asset orders. Your account, your benchmark — TWAP or VWAP. Performance fee only when execution outperforms it." />
+<link rel="canonical" href="https://sfg.xyz/execution.html" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#06070A" />
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/assets/logo.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Starr Fintech Global" />
+<meta property="og:title" content="Execution — Starr Fintech Global" />
+<meta property="og:description" content="Benchmarked execution for large digital-asset orders. Performance fee only when execution outperforms the benchmark." />
+<meta property="og:url" content="https://sfg.xyz/execution.html" />
+<meta property="og:image" content="https://sfg.xyz/assets/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://sfg.xyz/assets/og.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Archivo:wght@500;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./assets/sfg.css" />
+</head>
+<body>
+  <canvas class="net" aria-hidden="true"></canvas>
+  <div class="gridlines" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="scanbar" aria-hidden="true"></div>
+  <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+
+  <nav class="bar">
+    <a class="brand" href="./"><span class="sq"></span>Starr Fintech Global</a>
+    <div class="tabs">
+      <a href="./">Home</a>
+      <a href="https://starrquantlab.com" target="_blank" rel="noopener">Starr Quant Lab</a>
+      <a href="./execution.html" aria-current="page">Execution</a>
+      <a href="./team.html">Team</a>
+      <a href="./contact.html">Contact</a>
+    </div>
+    <div class="status"><b>live</b> · <span data-clock>—</span></div>
+    <button class="menu-btn" aria-label="Menu">Menu</button>
+  </nav>
+
+  <main class="stack">
+    <header class="page-head wrap">
+      <p class="eyebrow"><span class="blink"></span>// execution-as-a-service</p>
+      <h1 class="display" data-scramble="STARR EXECUTION" style="margin-top:18px"></h1>
+      <p class="lede" data-fade style="margin-top:24px">Benchmarked execution for large digital-asset orders.
+        You define the order, the window, and the benchmark — <em>TWAP</em> or <em>VWAP</em>. Our low-latency
+        stack works it. <span class="hl">The performance fee applies only when execution outperforms the
+        benchmark you chose.</span></p>
+      <div class="meta" data-fade>
+        <div><b>0</b>fee below benchmark</div>
+        <div><b>100%</b>fills in your own account</div>
+        <div><b>1</b>TCA report per order</div>
+      </div>
+      <div data-fade style="margin-top:36px;display:flex;gap:14px;flex-wrap:wrap">
+        <a class="btn solid" href="./contact.html">Talk execution →</a>
+        <a class="btn ghost" href="#how">How it works</a>
+      </div>
+    </header>
+
+    <!-- THE PROBLEM -->
+    <section id="problem" class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow"><span class="idx">01</span> — The Problem</p>
+        <h2 class="h-sec" data-scramble="SIZE MOVES MARKETS"></h2>
+        <p class="lede" data-fade>A large rebalance pays an invisible tax on the way in. Three leakages
+          compound between the decision price and the final fill.</p>
+      </div>
+      <div class="fw-grid" data-stagger>
+        <article class="fw">
+          <span class="fw-no">01</span>
+          <h3>Market Impact</h3>
+          <p>Size consumes visible depth and pushes the price against itself. Child orders that arrive
+            later in the same burst fill at progressively worse levels.</p>
+        </article>
+        <article class="fw">
+          <span class="fw-no">02</span>
+          <h3>Spread &amp; Queue</h3>
+          <p>Crossing the spread pays it in full. Naive passive orders sit at the back of the queue,
+            miss fills, and get forced across the spread as the window closes.</p>
+        </article>
+        <article class="fw">
+          <span class="fw-no">03</span>
+          <h3>Timing Cost</h3>
+          <p>Fixed-schedule execution is blind to liquidity and volatility. It keeps buying into dry
+            books and keeps absorbing toxic flow when it should stand down.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- THE SERVICE -->
+    <section id="how" class="wrap">
+      <div class="feature">
+        <div>
+          <p class="eyebrow"><span class="idx">02</span> — The Service</p>
+          <h2 class="h-sec" data-fade style="margin-top:18px">YOU SET THE GOAL.<br />WE WORK THE ORDER.</h2>
+          <p class="lede" data-fade style="margin-top:22px">Submit a parent order — symbol, size, window,
+            benchmark. Execution algorithms (<b>participation-of-volume</b>, <b>implementation-shortfall</b>,
+            <b>passive accumulation</b>) slice it into child orders and work them through our in-house
+            low-latency stack: binary-protocol codecs, queue-position management, and microstructure-aware
+            timing. The same engine that runs our own capital runs yours.</p>
+        </div>
+        <div class="spec" data-fade>
+          <div class="row"><span class="k">Mandate</span><span class="v"><b>Execution only</b> — your parameters, our machinery</span></div>
+          <div class="row"><span class="k">Funds</span><span class="v">Never leave <b>your own exchange account</b></span></div>
+          <div class="row"><span class="k">Access</span><span class="v"><b>Trade-only API keys</b> — withdrawal-enabled keys rejected</span></div>
+          <div class="row"><span class="k">Venues</span><span class="v">Major digital-asset venues — <b>Binance · OKX · Bitget</b></span></div>
+          <div class="row"><span class="k">Visibility</span><span class="v">Live progress vs <b>benchmark</b>, order by order</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VERIFIABLE -->
+    <section id="proof" class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow"><span class="idx">03</span> — Benchmarked &amp; Verifiable</p>
+        <h2 class="h-sec" data-scramble="PROOF, NOT PROMISES"></h2>
+        <p class="lede" data-fade>Every number we report can be checked without trusting us. Verification
+          is built into the structure, not promised in a pitch.</p>
+      </div>
+      <div class="fw-grid" data-stagger>
+        <article class="fw">
+          <span class="fw-no">01</span>
+          <h3>Your Account, Your Fills</h3>
+          <p>Execution happens on your own exchange account via trade-only keys. Every child fill is
+            visible to you on the venue in real time — fills cannot be misreported.</p>
+          <span class="tag">Client-held funds</span>
+        </article>
+        <article class="fw">
+          <span class="fw-no">02</span>
+          <h3>Public Benchmark</h3>
+          <p>The TWAP / VWAP benchmark for your chosen window is computed from the venue's public market
+            data, under a published methodology — independently recomputable by anyone.</p>
+          <span class="tag">Recomputable</span>
+        </article>
+        <article class="fw">
+          <span class="fw-no">03</span>
+          <h3>Per-Order TCA Report</h3>
+          <p>Each parent order closes with a transaction-cost analysis: execution average vs benchmark,
+            plus a full implementation-shortfall decomposition against the arrival price.</p>
+          <span class="tag">TCA per order</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- FEE MODEL -->
+    <section id="fee" class="wrap">
+      <div class="feature">
+        <div>
+          <p class="eyebrow"><span class="idx">04</span> — The Fee Model</p>
+          <h2 class="h-sec" data-fade style="margin-top:18px">ALIGNED BY CONSTRUCTION</h2>
+          <p class="lede" data-fade style="margin-top:22px">No retainer, no spread markup. The fee is a share
+            of measured savings — the basis points between your execution average and the benchmark you
+            selected, on filled notional. When execution does not outperform the benchmark, the performance
+            fee is <b>zero</b>, and underperformance carries forward on a high-water-mark basis before any
+            fee resumes.</p>
+        </div>
+        <div class="spec" data-fade>
+          <div class="row"><span class="k">Fee basis</span><span class="v"><b>Saved basis points</b> vs your chosen benchmark</span></div>
+          <div class="row"><span class="k">Below benchmark</span><span class="v"><b>Zero</b> performance fee</span></div>
+          <div class="row"><span class="k">Carry-forward</span><span class="v"><b>High-water mark</b> across settlement periods</span></div>
+          <div class="row"><span class="k">Share rate</span><span class="v">Agreed per mandate, <b>in writing</b></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO / BOUNDARIES -->
+    <section id="who" class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow"><span class="idx">05</span> — Who It's For</p>
+        <h2 class="h-sec" data-scramble="BUILT FOR INSTITUTIONS"></h2>
+        <p class="lede" data-fade>Quantitative teams, funds, and treasuries with periodic large rebalances —
+          typically $100k to $10M per parent order over windows of minutes to hours. If execution slippage
+          is a line item in your PnL, it is the line item we work on.</p>
+      </div>
+      <div class="spec" data-fade>
+        <div class="row"><span class="k">Service scope</span><span class="v"><b>Execution technology only</b> — no custody, no investment advice, no capital solicitation</span></div>
+        <div class="row"><span class="k">Clientele</span><span class="v"><b>Professional &amp; institutional</b> counterparties only</span></div>
+        <div class="row"><span class="k">Jurisdictions</span><span class="v">Not available to residents of <b>Canada or the USA</b></span></div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact-cta" class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow"><span class="idx">06</span> — Get Started</p>
+        <h2 class="h-sec" data-scramble="TALK EXECUTION"></h2>
+        <p class="lede" data-fade>Tell us your typical order size, window, and venue. We'll come back with
+          a benchmark methodology, a mandate template, and a pilot structure.</p>
+      </div>
+      <div data-fade style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+        <a class="btn solid" href="./contact.html">Contact us →</a>
+        <a class="btn ghost" href="mailto:msx@sfg.xyz">msx@sfg.xyz</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot-top">
+        <div>
+          <div class="brand" style="margin-bottom:18px"><span class="sq"></span>Starr Fintech Global</div>
+          <p class="foot-desc"><b>Starr Fintech Global (SFG)</b> is a technology-driven brand established in 2024,
+            a centralized portfolio for innovation in systematic trading and data research, encompassing
+            <b>Starr Quant Lab Ltd.</b> (BVI). Starr Execution is an execution-technology service for
+            professional counterparties — we do not take custody of client funds, solicit capital, or
+            provide investment advice.</p>
+        </div>
+        <div class="foot-links">
+          <span class="lab">Navigate</span>
+          <a href="./">Home</a>
+          <a href="https://starrquantlab.com" target="_blank" rel="noopener">Starr Quant Lab ↗</a>
+          <a href="./execution.html">Execution</a>
+          <a href="./team.html">Team</a>
+          <a href="./contact.html">Contact</a>
+          <span class="lab" style="margin-top:18px">Legal</span>
+          <a href="./privacy-policy.html">Privacy Policy</a>
+          <a href="./accessibility-statement.html">Accessibility Statement</a>
+        </div>
+      </div>
+      <div class="foot-bot">
+        <span>© <span data-year>2026</span> SFG · Starr Quant Lab Ltd. is a BVI Business Company.</span>
+        <span>We do not solicit capital or provide financial services to residents of Canada or the USA.</span>
+      </div>
+    </div>
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="./assets/sfg.js"></script>
+</body>
+</html>
