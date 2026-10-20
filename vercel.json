@@ -6,9 +6,27 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/execution.html",
+      "destination": "https://deck.sfg.xyz/#/execution",
+      "permanent": true
+    },
+    {
+      "source": "/execution",
+      "destination": "https://deck.sfg.xyz/#/execution",
+      "permanent": true
     }
   ]
 }
