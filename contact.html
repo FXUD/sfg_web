@@ -118,6 +118,9 @@
   const ENDPOINT = ''; // e.g. 'https://formspree.io/f/xxxx'
   const f = document.getElementById('cform'), note = document.getElementById('note');
   if (!f) return;
+  // team page "Apply now" links here with ?topic=careers
+  const careers = new URLSearchParams(location.search).get('topic') === 'careers';
+  if (careers) f.elements.msg.placeholder = 'The role or area you are interested in, plus links to your CV, GitHub or LinkedIn.';
   f.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!f.checkValidity()) { f.reportValidity(); return; }
@@ -131,7 +134,7 @@
       } catch { note.textContent = 'Network error; email us directly.'; }
       return;
     }
-    const subject = encodeURIComponent(`SFG inquiry — ${d.fn} ${d.ln}${d.co ? ' (' + d.co + ')' : ''}`);
+    const subject = encodeURIComponent(`SFG ${careers ? 'careers' : 'inquiry'} — ${d.fn} ${d.ln}${d.co ? ' (' + d.co + ')' : ''}`);
     const body = encodeURIComponent(`Name: ${d.fn} ${d.ln}\nEmail: ${d.em}\nPhone: ${d.ph || '—'}\nCompany: ${d.co || '—'}\n\n${d.msg}`);
     window.location.href = `mailto:msx@sfg.xyz?subject=${subject}&body=${body}`;
     note.textContent = 'Opening your email client…';
