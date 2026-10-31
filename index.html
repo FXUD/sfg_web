@@ -195,16 +195,19 @@
 
     <!-- STRATEGIC PARTNERS -->
     <section id="partners" class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow"><span class="idx">04</span> — Strategic Partners</p>
-        <h2 class="h-sec" data-scramble="IN GOOD COMPANY"></h2>
-        <p class="lede" data-fade>The firms we build, trade and grow alongside.</p>
-      </div>
-      <div class="partner-grid" data-stagger>
-        <div class="partner">
-          <img src="./assets/partners/openflow.png" alt="OpenFlow" loading="lazy" />
-          <span class="cap"><b>OpenFlow</b><span>Strategic partner</span></span>
+      <div class="partners" data-fade>
+        <div class="partners-head">
+          <p class="eyebrow" id="partners-title" role="heading" aria-level="2"><span class="idx">04</span> — Strategic Partners</p>
+          <p>The firms we build, trade and grow alongside.</p>
         </div>
+        <!-- Add a partner: one <li> per logo, same rules as the exchange strip on starrquantlab.com.
+             PNG in assets/partners/: white single-colour on transparent, trimmed, 72px tall.
+             Rendered height = --h (default 22px; set style="--h:NNpx" on the <img>: about 32-36 for square marks,
+             lower for very wide wordmarks). width/height attrs = rendered size: height = --h,
+             width = round(png_width x --h / 72). alt = company name. No link unless the partner should be linked. -->
+        <ul class="partner-logos" aria-labelledby="partners-title">
+          <li><img src="./assets/partners/openflow.png" alt="OpenFlow" width="138" height="22" loading="lazy" /></li>
+        </ul>
       </div>
     </section>
 
