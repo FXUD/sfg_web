@@ -185,6 +185,15 @@ section{position:relative;padding:130px 0}
 .lead.ghost .role{color:var(--faint)}
 .lead.ghost .bio{color:var(--faint);font-style:italic}
 
+/* ── partners (home) ── */
+.partner-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.partner{display:flex;flex-direction:column;justify-content:space-between;gap:30px;min-height:190px;padding:38px 30px 24px;
+  background:var(--bg-2);box-shadow:inset -1px -1px 0 var(--line);transition:background .3s}
+a.partner:hover{background:var(--panel-2)}
+.partner img{height:46px;width:auto;max-width:100%;object-fit:contain;object-position:left center}
+.partner .cap{display:flex;justify-content:space-between;gap:12px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.partner .cap b{color:var(--fg);font-weight:500}
+
 /* ── contact form ── */
 .form{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:680px}
 .form .full{grid-column:1/-1}
