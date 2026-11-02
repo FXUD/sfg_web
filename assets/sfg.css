@@ -185,18 +185,15 @@ section{position:relative;padding:130px 0}
 .lead.ghost .role{color:var(--faint)}
 .lead.ghost .bio{color:var(--faint);font-style:italic}
 
-/* ── partners (home): one logo strip, same white-mark treatment as the exchange strip on starrquantlab.com, drawn larger ── */
+/* ── partners (home): heading + line on top, one full-width row of logos below (wraps as partners are added);
+      same white-mark treatment as the exchange strip on starrquantlab.com, drawn larger ── */
 #partners{padding-top:130px}
-.partners{display:grid;grid-template-columns:minmax(0,380px) 1fr;gap:24px 80px;align-items:center;
-  padding:52px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.partners{display:grid;gap:24px;padding:52px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .partners-head{display:flex;flex-direction:column;gap:14px}
 .partners-head p:not(.eyebrow){font-size:15px;line-height:1.65;color:var(--dim);text-wrap:balance}
 .partner-logos{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:26px 48px}
 .partner-logos img{height:var(--h,36px);width:auto;object-fit:contain;object-position:left center;opacity:.72;transition:opacity .4s}
 .partner-logos li:hover img{opacity:1}
-/* stacked (narrow screens, or 4+ partners): logos get the full width instead of piling up beside the heading */
-.partners:has(.partner-logos li:nth-child(4)){grid-template-columns:1fr}
-@media(max-width:1023px){.partners{grid-template-columns:1fr}}
 
 /* ── contact form ── */
 .form{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:680px}

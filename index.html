@@ -203,14 +203,13 @@
         <!-- Add a partner: one <li> per logo, white marks like the exchange strip on starrquantlab.com, drawn larger here.
              PNG in assets/partners/: white single-colour on transparent, trimmed, PNG height = 2 x --h so it stays sharp
              on retina screens (72px for the default 36px; about 100-112px for a square mark at 50-56px).
-             From the 4th partner on, the strip stacks (heading above, logos on one full-width row).
              Rendered height = --h (default 36px; set style="--h:NNpx" on the <img>: about 50-56 for square marks,
              lower for very wide wordmarks and for wordmarks whose letters fill the whole box with no taller icon,
-             so their letters match OpenFlow's, e.g. Qtick.Dev at 28). width/height attrs = rendered size: height = --h,
+             e.g. Qtick.Dev at 30). width/height attrs = rendered size: height = --h,
              width = round(png_width x --h / png_height). alt = company name. No link unless the partner should be linked. -->
         <ul class="partner-logos" aria-labelledby="partners-title">
           <li><img src="./assets/partners/openflow.png" alt="OpenFlow" width="227" height="36" loading="lazy" /></li>
-          <li><img src="./assets/partners/qtickdev.png" alt="Qtick.Dev" width="157" height="28" loading="lazy" style="--h:28px" /></li>
+          <li><img src="./assets/partners/qtickdev.png" alt="Qtick.Dev" width="168" height="30" loading="lazy" style="--h:30px" /></li>
         </ul>
       </div>
     </section>
